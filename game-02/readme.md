@@ -1,42 +1,97 @@
-# Gilded Rose Requirements Specification
+# Gilded Rose Refactoring Kata
 
-## What we need?
+## 🧠 Objetivo
 
-- Refactor the terrible code: `app/gilded-rose.ts`
+Refactorizar el código legado de `GildedRose` y añadir soporte para un nuevo tipo de ítem: **Conjured**, cumpliendo con buenas prácticas de diseño, eficiencia y facilidad de pruebas.
 
-## Rules and new requirement
+Este ejercicio forma parte del reto técnico proporcionado por **PreAuth**, el cual puede encontrarse en el siguiente enlace:  
+👉 [Descripción del reto en GitHub](https://github.com/preauth-io/challenge/tree/main/game-02)
 
-Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a
-prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
-Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We
-have a system in place that updates our inventory for us. It was developed by a no-nonsense type named
-Leeroy, who has moved on to new adventures. Your task is to add the new feature to our system so that
-we can begin selling a new category of items. First an introduction to our system:
 
-- All items have a SellIn value which denotes the number of days we have to sell the item
-- All items have a Quality value which denotes how valuable the item is
-- At the end of each day our system lowers both values for every item
+---
 
-Pretty simple, right? Well this is where it gets interesting:
-- Once the sell by date has passed, Quality degrades twice as fast
-- The Quality of an item is never negative
-- "Aged Brie" actually increases in Quality the older it gets
-- The Quality of an item is never more than 50
-- "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
-- "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
-	
-    Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
-	Quality drops to 0 after the concert
+## ✅ Características implementadas
 
-We have recently signed a supplier of conjured items. This requires an update to our system:
+- Refactorización modular y orientado a funciones puras por tipo de ítem.
+- Separación clara de responsabilidades en carpetas (`classes`, `helpers`, `config`).
+- Validaciones de calidad máxima y mínima según reglas del negocio.
+- Lógica centralizada para `updateQuality`, con funciones específicas por ítem.
+- Suite completa de tests con Jest para cada caso de uso.
+- Proyecto desarrollado en **TypeScript**.
 
-- "Conjured" items degrade in Quality twice as fast as normal items
+---
 
-Feel free to make any changes to the UpdateQuality method and add any new code as long as everything
-still works correctly. However, do not alter the Item class or Items property as those belong to the
-goblin in the corner who will insta-rage and one-shot you as he doesn't believe in shared code
-ownership (you can make the UpdateQuality method and Items property static if you like, we'll cover
-for you).
+## 🚀 Cómo ejecutar el proyecto
 
-Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a
-legendary item and as such its Quality is 80 and it never alters.
+```bash
+git clone https://github.com/pieromental/preauth_test.git
+cd game-02
+npm install
+npm test           # Ejecuta todos los tests
+npm run compile     # Compila el proyecto con TypeScript
+npm run coverage    # Genera el reporte de cobertura
+```
+
+---
+
+## 🧪 Reglas por tipo de ítem
+
+### Normal Items
+- Calidad baja -1 cada día.
+- Si está vencido (`sellIn <= 0`), baja -2.
+- `quality` nunca es menor a 0.
+
+### Aged Brie
+- Incrementa su calidad con el tiempo.
+- +1 por día si `sellIn > 0`, +2 si está vencido.
+- `quality` nunca supera 50.
+
+### Backstage passes
+- +1 si `sellIn > 10`
+- +2 si `6 <= sellIn <= 10`
+- +3 si `1 <= sellIn <= 5`
+- `quality = 0` si `sellIn <= 0`
+
+### Sulfuras
+- `sellIn` y `quality` no cambian.
+- Siempre tiene `quality = 80`.
+
+### Conjured
+- Degrada el doble que un ítem normal.
+- -2 por día si no está vencido, -4 si lo está.
+- `quality` nunca es menor a 0.
+
+---
+
+## 📊 Cobertura de pruebas
+
+- Test unitarios detallados para cada tipo de ítem.
+- Validación de reglas de negocio.
+- Validación de extremos (`quality = 0`, `quality = 50`, `sellIn <= 0`).
+- Cobertura de código generada con `jest --coverage`.
+
+---
+
+## 📂 Estructura del proyecto
+
+```
+/app
+  ├── classes/
+  ├── config/
+  ├── helpers/
+  └── gilded-rose.ts
+
+/__tests
+  └── gilded-rose.test.ts
+```
+
+---
+
+## 🤝 Evaluación esperada
+
+- ✅ Buenas prácticas de código (modular, legible)
+- ✅ Código autoexplicativo (self-documenting)
+- ✅ Eficiencia en ejecución y uso de memoria
+- ✅ Código fácil de testear (clases y funciones unitarias)
+
+
