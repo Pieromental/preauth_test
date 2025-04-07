@@ -1,23 +1,22 @@
-# Gilded Rose Refactoring Kata
+# Gilded Rose Refactoring Kata con Patrón Strategy
 
 ## 🧠 Objetivo
 
-Refactorizar el código legado de `GildedRose` y añadir soporte para un nuevo tipo de ítem: **Conjured**, cumpliendo con buenas prácticas de diseño, eficiencia y facilidad de pruebas.
+Refactorizar el código legado de `GildedRose` y añadir soporte para un nuevo tipo de ítem: **Conjured**, utilizando el patrón de diseño **Strategy**, cumpliendo con buenas prácticas de diseño, eficiencia y facilidad de pruebas.
 
 Este ejercicio forma parte del reto técnico proporcionado por **PreAuth**, el cual puede encontrarse en el siguiente enlace:  
 👉 [Descripción del reto en GitHub](https://github.com/preauth-io/challenge/tree/main/game-02)
-
 
 ---
 
 ## ✅ Características implementadas
 
-- Refactorización modular y orientado a funciones puras por tipo de ítem.
-- Separación clara de responsabilidades en carpetas (`classes`, `helpers`, `config`).
+- Refactorización usando el patrón **Strategy** para separar la lógica de actualización por tipo de ítem.
+- Estructura orientada a objetos con una interfaz común `UpdateStrategy`.
+- Separación clara de responsabilidades en carpetas (`classes`, `helpers`, `strategies`, `interfaces`, `config`).
 - Validaciones de calidad máxima y mínima según reglas del negocio.
-- Lógica centralizada para `updateQuality`, con funciones específicas por ítem.
-- Suite completa de tests con Jest para cada caso de uso.
-- Proyecto desarrollado en **TypeScript**.
+- Proyecto desarrollado completamente en **TypeScript**.
+- Suite de pruebas unitarias completas con **Jest**.
 
 ---
 
@@ -27,14 +26,14 @@ Este ejercicio forma parte del reto técnico proporcionado por **PreAuth**, el c
 git clone https://github.com/pieromental/preauth_test.git
 cd game-02
 npm install
-npm test           # Ejecuta todos los tests
+npm test            # Ejecuta todos los tests
 npm run compile     # Compila el proyecto con TypeScript
 npm run coverage    # Genera el reporte de cobertura
 ```
 
 ---
 
-## 🧪 Reglas por tipo de ítem
+## 🤮 Reglas por tipo de ítem
 
 ### Normal Items
 - Calidad baja -1 cada día.
@@ -65,10 +64,10 @@ npm run coverage    # Genera el reporte de cobertura
 
 ## 📊 Cobertura de pruebas
 
-- Test unitarios detallados para cada tipo de ítem.
-- Validación de reglas de negocio.
-- Validación de extremos (`quality = 0`, `quality = 50`, `sellIn <= 0`).
-- Cobertura de código generada con `jest --coverage`.
+- Pruebas unitarias por estrategia individual.
+- Pruebas de integración para `GildedRose`.
+- Validación de reglas de negocio y casos extremos (`quality = 0`, `quality = 50`, `sellIn <= 0`).
+- Cobertura generada con `jest --coverage`.
 
 ---
 
@@ -76,23 +75,28 @@ npm run coverage    # Genera el reporte de cobertura
 
 ```
 /app
-  ├── classes/
-  ├── config/
-  ├── helpers/
-  └── gilded-rose.ts
+  /classes        # Clases para cada tipo de item (AgedBrie, Conjured, etc.)
+  /config         # Constantes globales
+  /helpers        # Funciones puras como increase/decreaseQuality
+  /interfaces     # Interfaces como UpdateStrategy
+  /strategies     # Diccionario de estrategias (strategy map)
+  gilded-rose.ts  # Lógica central de iteración sobre los items
 
-/__tests
-  └── gilded-rose.test.ts
+/tests
+  /classes        # Tests unitarios por estrategia
+  gilded-rose.test.ts  # Test de integración general
 ```
 
 ---
 
 ## 🤝 Evaluación esperada
 
-- ✅ Buenas prácticas de código (modular, legible)
-- ✅ Código autoexplicativo (self-documenting)
-- ✅ Eficiencia en ejecución y uso de memoria
-- ✅ Código fácil de testear (clases y funciones unitarias)
+- ✅ Buenas prácticas de código (modular, legible, sin duplicación)
+- ✅ Patrón Strategy bien aplicado (una clase por tipo de lógica)
+- ✅ Código orientado a objetos con principios SOLID
+- ✅ Tests claros y cubriendo todos los escenarios
+
+---
 
 ## 👨‍💻 Autor
 
