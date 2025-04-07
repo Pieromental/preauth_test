@@ -61,5 +61,5 @@ npm run coverage   # Genera el reporte de cobertura
 
 ## 👨‍💻 Autor
 
-Piero Alvaro Salazar Calle – [@mr.pieromental](https://github.com/mr.pieromental)
+Piero Alvaro Salazar Calle – [@mr.pieromental](https://github.com/Pieromental)
 

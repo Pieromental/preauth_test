@@ -94,4 +94,6 @@ npm run coverage    # Genera el reporte de cobertura
 - ✅ Eficiencia en ejecución y uso de memoria
 - ✅ Código fácil de testear (clases y funciones unitarias)
 
+## 👨‍💻 Autor
 
+Piero Alvaro Salazar Calle – [@mr.pieromental](https://github.com/Pieromental)
