@@ -16,7 +16,7 @@ export class GildedRose {
 
   updateItems(): Item[] {
     this.items.forEach(item => {
-      const strategy = strategies[item.name] || new Normal();
+      const strategy = strategies[item.name] || strategies["default"];
       strategy.update(item);
     });
     return this.items;
