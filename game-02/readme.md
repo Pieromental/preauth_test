@@ -5,7 +5,7 @@
 Refactorizar el código legado de `GildedRose` y añadir soporte para un nuevo tipo de ítem: **Conjured**, utilizando el patrón de diseño **Strategy**, cumpliendo con buenas prácticas de diseño, eficiencia y facilidad de pruebas.
 
 Este ejercicio forma parte del reto técnico proporcionado por **PreAuth**, el cual puede encontrarse en el siguiente enlace:  
-👉 [Descripción del reto en GitHub](https://github.com/preauth-io/challenge/tree/main/game-02)
+👉 [Descripción del reto en GitHub](https://github.com/emilybache/GildedRose-Refactoring-Kata)
 
 ---
 
